@@ -8,7 +8,7 @@ import {LoggerService} from './logger.service';
 export class CalculatorService {
 
 
-  constructor(private logger: LoggerService) {
+  constructor(private readonly logger: LoggerService) {
 
   }
 
