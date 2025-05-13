@@ -21,7 +21,7 @@ describe('HomeComponent', () => {
   let coursesService: any;
 
   const beginnerCourses = setupCourses()
-      .filter(course => course.category === "BEGINNER")
+    .filter(course => course.category === "BEGINNER")
 
   const advancedCourses = setupCourses()
     .filter(course => course.category === "ADVANCED")
@@ -40,7 +40,7 @@ describe('HomeComponent', () => {
         // NoopAnimationsModule = no operation
       ],
       providers: [
-        { provide: CoursesService, useValue: coursesServiceSpy}
+        { provide: CoursesService, useValue: coursesServiceSpy }
       ]
     }).compileComponents()
       .then(() => {
@@ -60,14 +60,14 @@ describe('HomeComponent', () => {
 
 
   it("should display only beginner courses", () => {
-    console.log(beginnerCourses);
+    //console.log(beginnerCourses);
     coursesService.findAllCourses.and.returnValue(of(beginnerCourses));
 
     fixture.detectChanges();
-    console.log(el.nativeElement.outerHTML);
+    //console.log(el.nativeElement.outerHTML);
 
     const tabs = el.queryAll(By.css(".mat-mdc-tab"));
-    
+
     expect(tabs.length).toBe(1, "Unexpected number of tabs found");
 
   });
@@ -79,19 +79,19 @@ describe('HomeComponent', () => {
     fixture.detectChanges();
 
     const tabs = el.queryAll(By.css(".mat-mdc-tab"));
-    
+
     expect(tabs.length).toBe(1, "Unexpected number of tabs found");
 
   });
 
 
   it("should display both tabs", () => {
-    coursesService.findAllCourses.and.returnValue(of(setupCourses()))
+    coursesService.findAllCourses.and.returnValue(of(setupCourses()));
 
     fixture.detectChanges();
 
     const tabs = el.queryAll(By.css(".mat-mdc-tab"));
-    
+
     expect(tabs.length).toBe(2, "Expected to found 2 tabs");
 
   });
@@ -99,10 +99,19 @@ describe('HomeComponent', () => {
 
   it("should display advanced courses when tab clicked", () => {
 
-    pending();
+    coursesService.findAllCourses.and.returnValue(of(setupCourses()));
 
+    fixture.detectChanges();
+
+    const tabs = el.queryAll(By.css(".mat-mdc-tab"));
+
+    click(tabs[1]);
+
+    fixture.detectChanges();
+
+    const cardTitles= el.queryAll(By.css("mat-mdc-card-title"));
+
+    expect(cardTitles.length).toBeGreaterThan(0, "Could not find cards titles");
+    expect(cardTitles[0].nativeElement.textContent).toContain("Angular Security Course");
   });
-
 });
-
-
