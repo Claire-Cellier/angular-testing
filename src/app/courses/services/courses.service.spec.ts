@@ -16,7 +16,6 @@ describe("CourseService", () => {
             imports: [HttpClientTestingModule],
             providers: [
                 CoursesService,
-                provideHttpClientTesting()
             ]
         });
 
