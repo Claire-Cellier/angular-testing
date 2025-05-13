@@ -12,6 +12,7 @@ describe('CoursesCardListComponent', () => {
 
   let component : CoursesCardListComponent;
   let fixture: ComponentFixture<CoursesCardListComponent>;
+  let el: DebugElement;
 
   beforeEach(waitForAsync( () => {
 
@@ -23,6 +24,7 @@ describe('CoursesCardListComponent', () => {
 
           fixture = TestBed.createComponent(CoursesCardListComponent);
           component = fixture.componentInstance;
+          el=fixture.debugElement;
         });
   }));
 
@@ -34,7 +36,12 @@ describe('CoursesCardListComponent', () => {
 
   it("should display the course list", () => {
 
-    pending();
+    component.courses = setupCourses();
+    
+    const cards = el.queryAll(By.css(".course-card"));
+
+    expect(cards).toBeTruthy("Could not find cards");
+    expect(cards.length).toBe(12, "Unexpected number of courses");
 
   });
 
